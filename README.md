@@ -7,3 +7,5 @@
 	* [unicafe](/part1/unicafe/)
 	* [anecdotes](/part1/anecdotes/)
 * Part 2
+	* [courseinfo](/part2/courseinfo/)
+	* [phonebook](/part2/phonebook/)
