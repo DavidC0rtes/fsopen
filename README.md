@@ -9,3 +9,4 @@
 * Part 2
 	* [courseinfo](/part2/courseinfo/)
 	* [phonebook](/part2/phonebook/)
+	* [countries](/part2/countries/)
