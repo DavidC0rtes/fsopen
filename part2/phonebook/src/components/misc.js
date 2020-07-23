@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Details = ( {person} ) => {
+const Details = ( {person, removePerson} ) => {
 	return (
-		<p key={person.name}>{person.name} {person.number}</p>
+		<p>
+			{person.name} {person.number}
+			<button onClick={removePerson} key={person.name}>delete</button>
+		</p>
 	)
 }
 
@@ -16,10 +19,15 @@ const PersonForm = (props) => {
 	)
 }
 
-const Persons = ( {numbersToShow} ) => {
+const Persons = ({ numbersToShow, removeNumberOf }) => {
 	return (
 		<div>
-			{numbersToShow.map(person => <Details key={person.name} person={person} />)}
+			{numbersToShow.map(person => <Details 
+											key={person.name} 
+											person={person} 
+											removePerson={()=> window.confirm(`Delete ${person.name}?`)	&& removeNumberOf(person.id)}
+										/>
+			)}
 		</div>
 	)
 }
