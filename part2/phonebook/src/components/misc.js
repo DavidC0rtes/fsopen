@@ -40,4 +40,26 @@ const Filter = ( {newFilter, handleNewFilter } ) => {
 	)
 }
 
-export {PersonForm, Persons, Filter}
+const Notification = ({ message }) => {
+	if (message === null) {
+		return null
+	}
+	
+	const notificationStyle = {
+		color: message.type === 'success' ? 'green' : 'red',
+		background: 'lightgrey',
+		fontStyle: 'italic',
+		borderStyle: 'solid',
+		borderRadius: 5,
+		padding: 10,
+		marginBottom: 10
+	}
+
+	return (
+		<div style={notificationStyle}>
+			{message.text}
+		</div>
+	)
+}
+
+export {PersonForm, Persons, Filter, Notification}

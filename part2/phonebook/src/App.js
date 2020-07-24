@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { PersonForm, Persons, Filter } from './components/misc'
+import { PersonForm, Persons, Filter, Notification } from './components/misc'
 import numService from './services/numbers'
 
 const App = () => {
@@ -7,6 +7,7 @@ const App = () => {
 	const [newName, setNewName] = useState('')
 	const [newNumber, setNewNumber] = useState('')
 	const [newFilter, setNewFilter] = useState('')
+	const [message, setMessage] = useState(null)
 
 	useEffect(() => {
 		numService
@@ -35,9 +36,12 @@ const App = () => {
 				.then(returnedName => {
 					setPersons(persons.concat(returnedName))
 				})
+			
+			setMessage({ text: `Added ${newName}`, type: 'success'})
+			setTimeout(() => {
+				setMessage(null)
+			}, 4000)
 		}
-
-
 		setNewName('')
 		setNewNumber('')
 	}
@@ -50,6 +54,24 @@ const App = () => {
 			.update(id, changedNumber)
 			.then(returnedPerson => {
 				setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+
+				setMessage({
+					text: `Updated phone number of ${personObject.name}`,
+					type: 'success'
+				})
+				setTimeout(() => {
+					setMessage(null)
+					}, 4000)
+			})
+			.catch(error => {
+				setMessage({
+					text: `Information of ${personObject.name} has already been removed from server`,
+					type: 'error'
+				})
+				setPersons(persons.filter(person => person.id !== id))
+				setTimeout(() => {
+					setMessage(null)
+				}, 4000)
 			})
 	}
 
@@ -72,6 +94,7 @@ const App = () => {
 	return (
 		<div>
 			<h2>Phonebook</h2>
+			<Notification message={message} />
 			<Filter newFilter={newFilter} handleNewFilter={handleNewFilter} />
 			<h2>Add a new</h2>
 			<PersonForm 
