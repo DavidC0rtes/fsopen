@@ -4,9 +4,9 @@
   "description": "blog list",
   "main": "index.js",
   "scripts": {
-	"start": "node index.js",
-	"dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest --verbose"
   },
   "author": "David",
   "license": "GPL-3.0-or-later",
@@ -17,6 +17,10 @@
     "mongoose": "^5.11.13"
   },
   "devDependencies": {
+    "jest": "^26.6.3",
     "nodemon": "^2.0.7"
+  },
+  "jest": {
+	"testEnvironment":"node"
   }
 }
