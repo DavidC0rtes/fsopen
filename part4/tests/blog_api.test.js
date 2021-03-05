@@ -82,6 +82,27 @@ test('blog without url and title returns 400', async() => {
         .expect(400)
 })
 
+test('a blog is deleted (with valid id)', async() => {
+    const id = "600b7886a911df1a97dbc23f"
+    await api
+        .delete(`/api/blogs/${id}`)
+        .expect(204)
+})
+
+test('a blog is updated', async() => {
+    const id = "600b7886a911df1a97dbc23f"
+
+    const updatedBlog = {
+        likes: 1000
+    }
+
+    await api
+        .put(`/api/blogs/${id}`)
+        .send(updatedBlog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+})
+
 afterAll(() => {
 	mongoose.connection.close()
 })
